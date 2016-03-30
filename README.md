@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ymattw/fibonacci-server.svg?branch=master)](https://travis-ci.org/ymattw/fibonacci-server)
+
 _Just a toy project for demo purpose._
 
 # About
