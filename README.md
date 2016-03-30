@@ -5,9 +5,8 @@ _Just a toy project for demo purpose._
 # About
 
 **Fibonacci Server** is a RESTful web service that provides the [Fibonacci
-number](https://en.wikipedia.org/wiki/Fibonacci_number) for any given integer
-less than a predefined number (default TODO).  Here we assume the sequence
-**starts from zero**.
+number](https://en.wikipedia.org/wiki/Fibonacci_number) (starts from 0) for any
+given integer less than a predefined number (default TODO).
 
 # Requirements
 
@@ -33,7 +32,7 @@ If you prefer to install as non-root user, consider use
 Just clone the source code, enter the directory and run:
 
 ```bash
-./fibonacci.py &
+./fibonacci_server.py &
 ```
 
 This will run the service and listen on port `8080` (use option `-p|--port N`
@@ -83,18 +82,18 @@ production and maintain for 5 years, so keep following practices in mind:
 Focus on core features first
 
 - [ ] The algorithm
-- [ ] The web service
+- [X] The web service
 - [ ] Command line option
 - [ ] Performance
 - [ ] Logging
 
 Follow engineering best practices as we go
 
-- [ ] Implement code lint check (pep8)
-- [ ] Implement unit tests and coverage report
+- [X] Implement code lint check (pep8)
+- [X] Implement unit tests and coverage report
 - [ ] Implement functional tests
-- [ ] Integrate with travis, make sure changes do not break existing logic
-- [ ] Iterate the work, each with a short living git branch
+- [X] Integrate with travis, make sure changes do not break existing logic
+- [X] Iterate the work, each with a short living git branch
 
 Long term (TODO)
 
