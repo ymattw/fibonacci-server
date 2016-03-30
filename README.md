@@ -6,7 +6,7 @@ _Just a toy project for demo purpose._
 
 **Fibonacci Server** is a RESTful web service that provides the [Fibonacci
 number](https://en.wikipedia.org/wiki/Fibonacci_number) (starts from 0) for any
-given integer less than a predefined number (default TODO).
+given integer less than a predefined number (see "Performance" section below).
 
 # Requirements
 
@@ -19,7 +19,7 @@ Fibonacci Server requires
 In general, you just need to bootstrap pip if you don't have that available on
 your system and use it to install Flask.  Here's how:
 
-```bash
+```
 $ which pip || curl -fsSL https://bootstrap.pypa.io/get-pip.py | sudo python
 $ sudo pip install flask
 ```
@@ -31,7 +31,7 @@ If you prefer to install as non-root user, consider use
 
 Just clone the source code, enter the directory and run:
 
-```bash
+```
 $ ./fibonacci_server.py &
 ```
 
@@ -62,7 +62,7 @@ The request format is `GET /:version/fib/:number`, where
 
 For example:
 
-```bash
+```
 $ curl -is localhost:8080/v1/fib/5
 ```
 
@@ -88,6 +88,48 @@ Status codes are listed below.
 
 See also [List of HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
 
+# Performance
+
+Counting 10,000 numbers takes _9ms_, counting 100,000 numbers takes _361ms_,
+this was done on a pretty recent MBP with 8G memory and python 2.7.10).
+
+```
+$ python fibonacci.py 10000
+         20002 function calls in 0.009 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.001    0.001    0.009    0.009 <string>:1(<module>)
+    10001    0.007    0.000    0.008    0.000 fibonacci.py:42(generate)
+        1    0.000    0.000    0.000    0.000 {len}
+     9998    0.001    0.000    0.001    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+$ python fibonacci.py 100000
+         200002 function calls in 0.361 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.008    0.008    0.361    0.361 <string>:1(<module>)
+   100001    0.346    0.000    0.353    0.000 fibonacci.py:42(generate)
+        1    0.000    0.000    0.000    0.000 {len}
+    99998    0.007    0.000    0.007    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+```
+
+On the other hand, size of response body reaches _10MB_ for _n=10,000_ and
+_~1GB_ for _n=100,000_, so limit the `fibonacci_server` to accept a number **<=
+10000** would be reasonable in both response time and size.
+
+```
+$ python fibonacci.py 100 | wc -c     # 1259
+$ python fibonacci.py 1000 | wc -c    # 107450 (107K)
+$ python fibonacci.py 10000 | wc -c   # 10479753 (10M)
+$ python fibonacci.py 100000 | wc -c  # 1045242714 (996M)
+```
+
 # Notes
 
 Although this project is admittedly trivial, imagine we'll have to put into
@@ -98,7 +140,7 @@ Focus on core features first
 - [X] The algorithm
 - [X] The web service
 - [X] Command line option
-- [ ] Performance
+- [X] Performance
 - [ ] Logging
 
 Follow engineering best practices as we go
