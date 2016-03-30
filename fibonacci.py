@@ -53,15 +53,24 @@ class Fibonacci(object):
 
 if __name__ == '__main__':  # pragma: no cover
     import sys
+    import cProfile
 
-    # Act as a simple command line tool to see how large the sequence is.
+    # Act as a simple command line tool and take a number from command line
+    try:
+        number = int(sys.argv[1])
+    except ValueError:
+        raise SystemExit('Please provide a postive number')
+
+    fib = Fibonacci()
+    statement = 'seq = list(fib.generate(number))'
+
+    # Too bad cProfile does not support dumping to stderr.  Here is the trick:
     #
-    #   python fibonacci.py 100 | wc -c    => 1259
-    #   python fibonacci.py 1000 | wc -c   => 107450 (107K)
-    #   python fibonacci.py 10000 | wc -c  => 10479753 (10M)
-    #   python fibonacci.py 100000 | wc -c => 1045242714 (996M)
+    # a) If stdout is redirected to a file or `wc -c`, just print the results
+    # b) Otherwise just dump the profiling data
     #
-    # Limit the number to <= 10000 will be reasonable.
-    #
-    g = Fibonacci().generate(int(sys.argv[1]))
-    print(list(g))
+    if sys.stdout.isatty():
+        cProfile.run(statement)
+    else:
+        exec(statement)
+        print(seq)

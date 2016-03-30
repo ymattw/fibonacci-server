@@ -14,4 +14,4 @@ report-html:
 	python -m webbrowser -n "file://$(shell pwd)/htmlcov/index.html"
 
 clean:
-	rm -rf *.pyc .coverage htmlcov/
+	rm -rf *.pyc .coverage htmlcov/ __pycache__/

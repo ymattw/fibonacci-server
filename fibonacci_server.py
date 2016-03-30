@@ -3,7 +3,8 @@
 
 """
 A RESTful web service that provides the Fibonacci number (starts from 0) for
-any given integer less than a predefined number (default TODO)
+any given integer less than a predefined number (see "Performance" section in
+README.md)
 """
 
 import json
@@ -13,7 +14,7 @@ from fibonacci import Fibonacci
 
 class FibonacciServer(object):
 
-    MAX_ACCEPTABLE_NUMBER = 1024  # FIXME: max number TBD
+    MAX_ACCEPTABLE_NUMBER = 10000
 
     def __init__(self, host='127.0.0.1', port=8080):
         self._host = host
