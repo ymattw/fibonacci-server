@@ -58,7 +58,7 @@ if __name__ == '__main__':  # pragma: no cover
     # Act as a simple command line tool and take a number from command line
     try:
         number = int(sys.argv[1])
-    except ValueError:
+    except:
         raise SystemExit('Please provide a postive number')
 
     fib = Fibonacci()
