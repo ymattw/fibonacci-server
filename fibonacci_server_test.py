@@ -37,12 +37,12 @@ class FibonacciServerTest(unittest.TestCase):
     def test_fib_zero(self):
         rv = self._app.get('/v1/fib/0')
         self.assertTrue(rv.status.startswith('200 '))
-        self.assertEqual(rv.data, '[]')
+        self.assertEqual(rv.data, b'[]')
 
     def test_fib_normal(self):
         rv = self._app.get('/v1/fib/2')
         self.assertTrue(rv.status.startswith('200 '))
-        self.assertEqual(rv.data, '[0, 1]')
+        self.assertEqual(rv.data, b'[0, 1]')
 
 
 if __name__ == '__main__':
