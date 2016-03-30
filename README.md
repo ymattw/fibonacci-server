@@ -6,13 +6,14 @@ _Just a toy project for demo purpose._
 
 **Fibonacci Server** is a RESTful web service that provides the [Fibonacci
 number](https://en.wikipedia.org/wiki/Fibonacci_number) (starts from 0) for any
-given integer less than a predefined number (see "Performance" section below).
+given integer less than a predefined number (10,000 for now, see
+["Performance"](#performance) section below).
 
 # Requirements
 
 Fibonacci Server requires
 
-- Python 2.6+, 3.3+ or pypy (verified versions are 2.6, 2.7, 3.3, 3.4, 3.5 and pypy)
+- Python 2.6+, 3.3+ or pypy (verified on are 2.6, 2.7, 3.3, 3.4, 3.5 and pypy)
 - [Flask](http://flask.pocoo.org/) web framework, which you can install with
   [pip](https://pip.pypa.io/en/stable/)
 
@@ -91,7 +92,7 @@ See also [List of HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_
 # Performance
 
 Counting 10,000 numbers takes _9ms_, counting 100,000 numbers takes _361ms_,
-this was done on a pretty recent MBP with 8G memory and python 2.7.10).
+this was done on a pretty recent MBP with 8G memory and python 2.7.10.
 
 ```
 $ python fibonacci.py 10000
@@ -156,7 +157,6 @@ Long term (TODO)
 - [ ] Start/stop scripts
 - [ ] Auto boot
 - [ ] Monitoring mechanism
-- [ ] Logging to file
 - [ ] Log rotate
 - [ ] Distributed version
 - [ ] Performance for distributed version: caching, pre-computing
