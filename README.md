@@ -12,7 +12,7 @@ given integer less than a predefined number (default TODO).
 
 Fibonacci Server requires
 
-- Python >= 2.6 (should already present on modern OS X and Linux distributions)
+- Python 2.6+, 3.3+ or pypy (verified versions are 2.6, 2.7, 3.3, 3.4, 3.5 and pypy)
 - [Flask](http://flask.pocoo.org/) web framework, which you can install with
   [pip](https://pip.pypa.io/en/stable/)
 
@@ -20,8 +20,8 @@ In general, you just need to bootstrap pip if you don't have that available on
 your system and use it to install Flask.  Here's how:
 
 ```bash
-which pip || curl -fsSL https://bootstrap.pypa.io/get-pip.py | sudo python
-sudo pip install flask
+$ which pip || curl -fsSL https://bootstrap.pypa.io/get-pip.py | sudo python
+$ sudo pip install flask
 ```
 
 If you prefer to install as non-root user, consider use
@@ -32,11 +32,25 @@ If you prefer to install as non-root user, consider use
 Just clone the source code, enter the directory and run:
 
 ```bash
-./fibonacci_server.py &
+$ ./fibonacci_server.py &
 ```
 
 This will run the service and listen on port `8080` (use option `-p|--port N`
 to change the default port). Now the service is running and ready to serve.
+
+Full usage can be shown with option `--help`:
+
+```
+$ ./fibonacci_server.py --help
+Usage: fibonacci_server.py [options]
+
+Options:
+  -h, --help            show this help message and exit
+  -p PORT, --port=PORT  Listen port, default is 8080
+  -a ADDRESS, --address=ADDRESS
+                        Listen address, default is 127.0.0.1, use "0.0.0.0"
+                        for all
+```
 
 # Request
 
@@ -49,7 +63,7 @@ The request format is `GET /:version/fib/:number`, where
 For example:
 
 ```bash
-curl -is localhost:8080/v1/fib/5
+$ curl -is localhost:8080/v1/fib/5
 ```
 
 This should responds you an JSON blob (array) `[0,1,1,2,3]` in the body as well
@@ -81,9 +95,9 @@ production and maintain for 5 years, so keep following practices in mind:
 
 Focus on core features first
 
-- [ ] The algorithm
+- [X] The algorithm
 - [X] The web service
-- [ ] Command line option
+- [X] Command line option
 - [ ] Performance
 - [ ] Logging
 
