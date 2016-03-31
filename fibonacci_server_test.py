@@ -42,6 +42,7 @@ class FibonacciServerTest(unittest.TestCase):
     def test_fib_normal(self):
         rv = self._app.get('/v1/fib/2')
         self.assertTrue(rv.status.startswith('200 '))
+        self.assertEqual(rv.headers['content-type'], 'application/json')
         self.assertEqual(rv.data, b'[0, 1]')
 
 
