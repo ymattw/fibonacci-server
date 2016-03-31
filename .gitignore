@@ -1,4 +1,6 @@
 *.pyc
+/*.log
+/*.log.*
 /.coverage
 /htmlcov/
 /__pycache__/
