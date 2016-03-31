@@ -4,4 +4,4 @@
 /.coverage
 /htmlcov/
 /__pycache__/
-/*venv/
+/envs/
