@@ -78,7 +78,7 @@ Status codes are listed below.
 
 | Status Code   | Message                  | Explanation                                       |
 | ------------- | ------------------------ | ------------------------------------------------- |
-| 200           | OK                       | Success, result json will be in body              |
+| 200           | OK                       | Success, result JSON will be in body              |
 | 400           | BAD REQUEST              | Input is invalid (not an integer or is negative)  |
 | 413           | REQUEST ENTITY TOO LARGE | Given number too large                            |
 | 500           | INTERNAL SERVER ERROR    | Unknown error happened on server side (check log) |
@@ -166,8 +166,7 @@ instance using the Flask web framework.  What does need to worry about are:
 
 # Notes
 
-Although this project is admittedly trivial, imagine we'll have to put into
-production and maintain for 5 years, so keep following practices in mind:
+Keep following practices in mind:
 
 Focus on core features first
 
@@ -181,17 +180,9 @@ Follow engineering best practices as we go
 
 - [X] Implement code lint check (pep8)
 - [X] Implement unit tests and coverage report
-- [ ] Implement functional tests
+- [X] Implement functional tests
 - [X] Integrate with travis, make sure changes do not break existing logic
 - [X] Iterate the work, each with a short living git branch
-
-Long term (TODO)
-
-- [ ] Start/stop scripts
-- [ ] Auto boot
-- [ ] Monitoring mechanism
-- [ ] Distributed version
-- [ ] Performance for distributed version: caching, pre-computing
 
 # Development Guide
 
@@ -199,7 +190,7 @@ Highly recommend to use [virtualenv](http://docs.python-guide.org/en/latest/dev/
 so that to develop with under different isolated python versions.  Once you
 have virtualenv bootstrapped (refer to ["Requirements"](#requirements)
 section), download different python versions (2.6, 2.7 and latest 3.x) from
-[python.org](http://python.org/) and install to your system, and then
+[python.org](http://python.org/) and install to your system, and then -
 
 Initialize virtual envs:
 
@@ -209,7 +200,7 @@ $ virtualenv -p `which python2.7` envs/2.7
 $ virtualenv -p `which python3.5` envs/3.5
 ```
 
-To work with spefic python version, for example 2.6:
+To work with specific python version, for example 2.6:
 
 ```
 $ source envs/2.6/bin/activate
@@ -222,3 +213,15 @@ To exit a virtual env:
 ```
 $ deactivate
 ```
+
+# Future Work
+
+Although this project is admittedly trivial, imagine we'll have to put into
+production and maintain for 5 years, followings work needs to be considered as
+well:
+
+- [ ] Start/stop scripts
+- [ ] Auto boot
+- [ ] Monitoring mechanism
+- [ ] Distributed version
+- [ ] Performance for distributed version: caching, pre-computing
