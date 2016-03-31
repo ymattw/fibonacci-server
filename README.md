@@ -175,7 +175,7 @@ Focus on core features first
 - [X] The web service
 - [X] Command line option
 - [X] Performance
-- [ ] Logging
+- [X] Logging with rotation support
 
 Follow engineering best practices as we go
 
@@ -190,6 +190,5 @@ Long term (TODO)
 - [ ] Start/stop scripts
 - [ ] Auto boot
 - [ ] Monitoring mechanism
-- [ ] Log rotate
 - [ ] Distributed version
 - [ ] Performance for distributed version: caching, pre-computing
