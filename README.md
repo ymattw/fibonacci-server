@@ -159,8 +159,7 @@ it caches all the results it has computed, performance of the Fibonacci Server
 is not a thing to worry at all, it just a wrapper on top of the computing
 instance using the Flask web framework.  What does need to worry about are:
 
-- Performance of the Flask framework itself (TODO: need effort to evaluate
-  existing python web frameworks)
+- Performance of the Flask framework itself
 - Performance of json.dumps(), for our simple use case we can write
   a C extension when it becomes a bottleneck
 
@@ -220,8 +219,20 @@ Although this project is admittedly trivial, imagine we'll have to put into
 production and maintain for 5 years, followings work needs to be considered as
 well:
 
-- [ ] Start/stop scripts
-- [ ] Auto boot
-- [ ] Monitoring mechanism
-- [ ] Distributed version
-- [ ] Performance for distributed version: caching, pre-computing
+- Start/stop scripts
+- Auto start across reboot
+- Monitoring mechanism (pid check, url check, performance check)
+
+If performance is a big deal, we should
+
+- Evaluate existing python web frameworks to select the best one
+- Rewrite the `json.dumps()` with C extension
+- Run multiple threads or instances on a single node and share the singleton
+  _Fibonacci_ object (shared memory)
+- Consider use other language, for example golang, to get better performance
+
+We can also consider implment a **distributed version**
+
+- Pre-compute Fibonacci sequence and store in centralized manner (Redis?
+  Memcached?)
+- Add a load balancer in front of multiple service nodes (HAProxy?)
