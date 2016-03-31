@@ -37,7 +37,8 @@ $ ./fibonacci_server.py &
 ```
 
 This will run the service and listen on port `8080` (use option `-p|--port N`
-to change the default port). Now the service is running and ready to serve.
+to change the default port). Now the service is running and ready to serve,
+logs go to `runtime.log`.
 
 Full usage can be shown with option `--help`:
 
@@ -186,9 +187,9 @@ Follow engineering best practices as we go
 # Development Guide
 
 Highly recommend to use [virtualenv](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
-so that to develop with under different isolated python versions.  Once you
-have virtualenv bootstrapped (refer to ["Requirements"](#requirements)
-section), download different python versions (2.6, 2.7 and latest 3.x) from
+so that to develop with different isolated python versions.  Once you have
+virtualenv bootstrapped (refer to ["Requirements"](#requirements) section),
+download different python versions (2.6, 2.7 and latest 3.x) from
 [python.org](http://python.org/) and install to your system, and then -
 
 Initialize virtual envs:
@@ -231,7 +232,7 @@ If performance is a big deal, we should
   _Fibonacci_ object (shared memory)
 - Consider use other language, for example golang, to get better performance
 
-We can also consider implment a **distributed version**
+We can also consider implement a **distributed version**
 
 - Pre-compute Fibonacci sequence and store in centralized manner (Redis?
   Memcached?)
