@@ -192,3 +192,33 @@ Long term (TODO)
 - [ ] Monitoring mechanism
 - [ ] Distributed version
 - [ ] Performance for distributed version: caching, pre-computing
+
+# Development Guide
+
+Highly recommend to use [virtualenv](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
+so that to develop with under different isolated python versions.  Once you
+have virtualenv bootstrapped (refer to ["Requirements"](#requirements)
+section), download different python versions (2.6, 2.7 and latest 3.x) from
+[python.org](http://python.org/) and install to your system, and then
+
+Initialize virtual envs:
+
+```
+$ virtualenv -p `which python2.6` envs/2.6
+$ virtualenv -p `which python2.7` envs/2.7
+$ virtualenv -p `which python3.5` envs/3.5
+```
+
+To work with spefic python version, for example 2.6:
+
+```
+$ source envs/2.6/bin/activate
+$ pip install -r requirements.txt
+$ make
+```
+
+To exit a virtual env:
+
+```
+$ deactivate
+```
