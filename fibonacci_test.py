@@ -24,8 +24,7 @@ class FibonacciTest(unittest.TestCase):
         self.assertEqual(next(x), 1)
         self.assertEqual(next(x), 1)
         self.assertEqual(next(x), 2)
-        with self.assertRaises(StopIteration):
-            next(x)
+        self.assertRaises(StopIteration, next, x)
 
     def test_minimal(self):
         self.assertEqual(self._fib.sequence(0), [])
