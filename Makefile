@@ -1,8 +1,9 @@
 .PHONY: test lint report-html clean
 
 test: lint
-	coverage run --append --omit='*venv/*' fibonacci_test.py
-	coverage run --append --omit='*venv/*' fibonacci_server_test.py
+	coverage erase
+	coverage run --append --omit='*/lib*/python*/*' fibonacci_test.py
+	coverage run --append --omit='*/lib*/python*/*' fibonacci_server_test.py
 	coverage report --show-missing
 
 lint:
