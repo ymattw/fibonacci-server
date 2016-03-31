@@ -46,7 +46,7 @@ class FibonacciServer(object):
             return self._response(413)
 
         try:
-            seq = list(self._fib.generate(n))
+            seq = self._fib.sequence(n)
             return self._response(200, seq)
         except:
             return self._response(500)

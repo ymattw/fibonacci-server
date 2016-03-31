@@ -91,32 +91,55 @@ See also [List of HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_
 
 # Performance
 
-Counting 10,000 numbers takes _9ms_, counting 100,000 numbers takes _361ms_,
-this was done on a pretty recent MBP with 8G memory and python 2.7.10.
+**The Fibonacci Algorithm**
+
+- Counting 10,000 numbers takes _7 ms_
+- Counting 100,000 numbers takes _330 ms_
+- Counting 500,000 numbers takes _61 s_
+
+These were done on a pretty recent MBP with 8G memory and python 2.7.10.  Note
+this is only for the first call for uncached numbers, the implementation has
+a singleton instance and caches all the results as it is runs.  Another good
+thing is it does not use recursion so _no max recursion depth limit_ at all.
 
 ```
 $ python fibonacci.py 10000
-         20002 function calls in 0.009 seconds
+         10003 function calls in 0.007 seconds
 
    Ordered by: standard name
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-        1    0.001    0.001    0.009    0.009 <string>:1(<module>)
-    10001    0.007    0.000    0.008    0.000 fibonacci.py:42(generate)
+        1    0.000    0.000    0.007    0.007 <string>:1(<module>)
+        1    0.007    0.007    0.007    0.007 fibonacci.py:42(__compute)
+        1    0.000    0.000    0.007    0.007 fibonacci.py:56(sequence)
         1    0.000    0.000    0.000    0.000 {len}
      9998    0.001    0.000    0.001    0.000 {method 'append' of 'list' objects}
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
 
 $ python fibonacci.py 100000
-         200002 function calls in 0.361 seconds
+         100003 function calls in 0.330 seconds
 
    Ordered by: standard name
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-        1    0.008    0.008    0.361    0.361 <string>:1(<module>)
-   100001    0.346    0.000    0.353    0.000 fibonacci.py:42(generate)
+        1    0.000    0.000    0.330    0.330 <string>:1(<module>)
+        1    0.321    0.321    0.328    0.328 fibonacci.py:42(__compute)
+        1    0.003    0.003    0.330    0.330 fibonacci.py:56(sequence)
         1    0.000    0.000    0.000    0.000 {len}
-    99998    0.007    0.000    0.007    0.000 {method 'append' of 'list' objects}
+    99998    0.006    0.000    0.006    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+$ python fibonacci.py 500000
+         500003 function calls in 61.763 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.003    0.003   61.763   61.763 <string>:1(<module>)
+        1   21.992   21.992   22.061   22.061 fibonacci.py:46(__compute)
+        1   39.699   39.699   61.760   61.760 fibonacci.py:60(sequence)
+        1    0.000    0.000    0.000    0.000 {len}
+   499998    0.069    0.000    0.069    0.000 {method 'append' of 'list' objects}
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
 ```
 
@@ -126,10 +149,23 @@ _~1GB_ for _n=100,000_, so limit the `fibonacci_server` to accept a number **<=
 
 ```
 $ python fibonacci.py 100 | wc -c     # 1259
-$ python fibonacci.py 1000 | wc -c    # 107450 (107K)
+$ python fibonacci.py 1000 | wc -c    # 107450 (105K)
 $ python fibonacci.py 10000 | wc -c   # 10479753 (10M)
+$ python fibonacci.py 50000 | wc -c   # 261386761 (249M)
 $ python fibonacci.py 100000 | wc -c  # 1045242714 (996M)
 ```
+
+**The Fibonacci Server**
+
+Since the underlying Fibonacci computing instance is a singleton instance and
+it caches all the results it has computed, performance of the Fibonacci Server
+is not a thing to worry at all, it just a wrapper on top of the computing
+instance using the Flask web framework.  What does need to worry about are:
+
+- Performance of the Flask framework itself (TODO: need effort to evaluate
+  existing python web frameworks)
+- Performance of json.dumps(), for our simple use case we can write
+  a C extension when it becomes a bottleneck
 
 # Notes
 
