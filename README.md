@@ -13,7 +13,7 @@ given integer less than a predefined number (10,000 for now, see
 
 Fibonacci Server requires
 
-- Python 2.6+, 3.3+ or pypy (verified on are 2.6, 2.7, 3.3, 3.4, 3.5 and pypy)
+- Python 2.6+, 3.3+ or pypy (verified on 2.6, 2.7, 3.3, 3.4, 3.5 and pypy)
 - [Flask](http://flask.pocoo.org/) web framework, which you can install with
   [pip](https://pip.pypa.io/en/stable/)
 
@@ -47,10 +47,8 @@ Usage: fibonacci_server.py [options]
 
 Options:
   -h, --help            show this help message and exit
+  -b BIND, --bind=BIND  Bind address, default 127.0.0.1, use "0.0.0.0" for all
   -p PORT, --port=PORT  Listen port, default is 8080
-  -a ADDRESS, --address=ADDRESS
-                        Listen address, default is 127.0.0.1, use "0.0.0.0"
-                        for all
 ```
 
 # Request
@@ -67,15 +65,14 @@ For example:
 $ curl -is localhost:8080/v1/fib/5
 ```
 
-This should responds you an JSON blob (array) `[0,1,1,2,3]` in the body as well
+This should give you an JSON blob (array) `[0, 1, 1, 2, 3]` in the body as well
 as a normal status code `200` in the header.  See more status codes below.
 
 # Response
 
-Response is a status code with human readable message in HTTP header and JSON
-array in body text (newline ended).  Note body text might contain unexpected
-HTML entities so a client should always check HTTP status code before parsing
-the body as JSON.
+Response is a status code with human readable message in HTTP header and a JSON
+array in body text.  Note body text might contain unexpected HTML entities so
+a client should always check HTTP status code before parsing the body as JSON.
 
 Status codes are listed below.
 
