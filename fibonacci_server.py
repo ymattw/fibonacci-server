@@ -71,12 +71,12 @@ if __name__ == '__main__':  # pragma: no cover
     from optparse import OptionParser
 
     parser = OptionParser(usage='%prog [options]')
+    parser.add_option('-b', '--bind', default='127.0.0.1',
+                      help=('Bind address, default 127.0.0.1, use '
+                            '"0.0.0.0" for all'))
     parser.add_option('-p', '--port', type='int', default=8080,
                       help='Listen port, default is 8080')
-    parser.add_option('-a', '--address', default='127.0.0.1',
-                      help=('Listen address, default is 127.0.0.1, use '
-                            '"0.0.0.0" for all'))
     opts, _ = parser.parse_args()
 
-    server = FibonacciServer(host=opts.address, port=opts.port)
+    server = FibonacciServer(host=opts.bind, port=opts.port)
     server.run()
