@@ -18,16 +18,25 @@ class FibonacciTest(unittest.TestCase):
     def setUp(self):
         self._fib = Fibonacci()
 
+    def test_generator(self):
+        x = self._fib.generate(4)
+        self.assertEqual(next(x), 0)
+        self.assertEqual(next(x), 1)
+        self.assertEqual(next(x), 1)
+        self.assertEqual(next(x), 2)
+        with self.assertRaises(StopIteration):
+            next(x)
+
     def test_minimal(self):
-        self.assertEqual(list(self._fib.generate(0)), [])
-        self.assertEqual(list(self._fib.generate(1)), [0])
-        self.assertEqual(list(self._fib.generate(2)), [0, 1])
+        self.assertEqual(self._fib.sequence(0), [])
+        self.assertEqual(self._fib.sequence(1), [0])
+        self.assertEqual(self._fib.sequence(2), [0, 1])
 
     def test_normal(self):
-        self.assertEqual(list(self._fib.generate(6)), [0, 1, 1, 2, 3, 5])
+        self.assertEqual(self._fib.sequence(6), [0, 1, 1, 2, 3, 5])
 
     def test_large(self):
-        x = list(self._fib.generate(100))
+        x = self._fib.sequence(100)
         self.assertEqual(len(x), 100)
         self.assertEqual(x[97], 83621143489848422977)
         self.assertEqual(x[98], 135301852344706746049)
@@ -37,7 +46,7 @@ class FibonacciTest(unittest.TestCase):
         """Result is too long so just verify the first and last 32 digits of
         the last number
         """
-        x = list(self._fib.generate(100000))
+        x = self._fib.sequence(100000)
         self.assertEqual(len(x), 100000)
         s = str(x[99999])
         self.assertEqual(len(s), 20899)
