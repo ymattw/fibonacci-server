@@ -13,3 +13,14 @@ install:
 
 script:
   - make test
+
+deploy:
+  provider: heroku
+  api_key:
+    # travis encrypt $(heroku auth:token) -r ymattw/fibonacci-server
+    secure: "M2bb+zNcAqReThtsten2yynA6kyjSvI4KwJTyDk5SvLP/dldj954N0jN2RBbWVQt7EBvcCzxJbGmjyuRMp3vqJm4kT4WbDw8ui/EID86Vz/R3SZJ3VV29K9h3HnyDzcPBaWzWAky0081aLpkxdI/9w0vn1lITTXtqr0SmBXHGCgN+IcJWujDakMTfSr0QylT4ed3d7G8rGm05M7/TXjJfuQjqGJNZP0gL1S3sUzQKVKuC8M13dHJb3p9N6443Rx+w766jU1XQvRfA8GL4XU37Oofw+uwWgzgWvBTcS7TC5VtgsJle75RQDC6/4p7Yj2TFh9aQuR66uPb1UsoFB378KXv8WwaVL3Gyo27yyyAwzcRA4/ncy8k27WUE0gMmugbdkMId59d6eQCyhLpBJn0mmPbhX/fLuUdvvj0GZR/URgPx8v4RHC0BVDjMjJMfRoqAb/Jl2CKpyMIlj61mph9pfTFLVjA6DTsBadkOkTJkIBLAquo0Y/X45c8eAB3eCNOn08Xly/SnIL9i+pjWzko82odYn0olpsjXi9FFIOPOYv41LXZe25D11h+0/rEZXm+7ymvF7vcHaUVEt7ZB2XWsY1WbJJIr4/Y1HnSbiK1GuLRC9UPr28kI4EZyoZcaQxOdY3jwFPSWbJkoUlwcLIV8qcRWa2SYaX/oALOxubnFNE="
+  app:
+    master: fibonacci-server
+
+after_deploy:
+  - curl -is https://fibonacci-server.herokuapp.com/v1/fib/6
