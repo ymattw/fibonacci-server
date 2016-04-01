@@ -9,6 +9,9 @@ number](https://en.wikipedia.org/wiki/Fibonacci_number) (starts from 0) for any
 given integer less than a predefined number (10,000 for now, see
 ["Performance"](#performance) section below).
 
+Demo is here _(Free heroku instance, sleep 6 hours everyday so not always
+working)_: https://fibonacci-server.herokuapp.com/v1/fib/50
+
 # Requirements
 
 Fibonacci Server requires
@@ -175,6 +178,7 @@ Focus on core features first
 - [X] Command line option
 - [X] Performance
 - [X] Logging with rotation support
+- [X] Auto deploy (to heroku)
 
 Follow engineering best practices as we go
 
