@@ -6,7 +6,6 @@ readonly SELF_DIR=$(cd $(dirname $0) && pwd)
 readonly SERVER_PORT=${SERVER_PORT:-60888}
 readonly SERVER_CMD_LINE="$SELF_DIR/fibonacci_server.py --port $SERVER_PORT"
 readonly SERVER_URL="http://localhost:${SERVER_PORT}"
-readonly TEST_LOG=$SELF_DIR/test_result.log
 
 # Test functions, name must starts with 'test_'
 #
@@ -45,10 +44,16 @@ function test_fib_zero
     check_call "/v1/fib/0" 200 "[]"
 }
 
-function test_fib_normal
+function test_fib_minimal
 {
     check_call "/v1/fib/2" 200 "[0, 1]"
 }
+
+function test_fib_normal
+{
+    check_call "/v1/fib/6" 200 "[0, 1, 1, 2, 3, 5]"
+}
+
 
 # Helper functions
 #
@@ -60,7 +65,7 @@ function start
 
 function stop
 {
-    pkill -f "$SERVER_CMD_LINE"
+    pkill -f "$SERVER_CMD_LINE" &>/dev/null
 }
 
 function check_call
@@ -68,17 +73,19 @@ function check_call
     local uri=${1:?}
     local expected_status=${2:?}
     local expected_body=${3:?}
+    local rc=0
     local out
     local status
     local body
 
     echo "Requesting ${SERVER_URL}${uri}"
     out=$(curl -is "${SERVER_URL}${uri}")
+    rc=$?
 
     # Output before returning non-zero (error)
     trap 'echo "$out"' RETURN
 
-    (( $? == 0 )) || return 1
+    (( rc == 0 )) || return 1
     [[ $out =~ ^HTTP/1\.[0-1]\ $expected_status ]] || return 1
     [[ $out == *Content-Type:\ application/json* ]] || return 1
     [[ $out == *${expected_body}* ]] || return 1
