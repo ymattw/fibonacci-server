@@ -1,5 +1,7 @@
 .PHONY: test lint unit report-html functional clean
 
+COVERAGE_OMIT ?= '*/lib*/python*/*,*/pypy-*/*'
+
 test: lint unit functional
 	
 lint:
@@ -7,8 +9,8 @@ lint:
 
 unit:
 	coverage erase
-	coverage run --append --omit='*/lib*/python*/*' fibonacci_test.py
-	coverage run --append --omit='*/lib*/python*/*' fibonacci_server_test.py
+	coverage run --append --omit=$(COVERAGE_OMIT) fibonacci_test.py
+	coverage run --append --omit=$(COVERAGE_OMIT) fibonacci_server_test.py
 	coverage report --show-missing
 
 # Open the html report in browser
