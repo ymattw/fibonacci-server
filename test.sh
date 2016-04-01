@@ -74,7 +74,7 @@ function check_call
     local expected_status=${2:?}
     local expected_body=${3:?}
     local rc=0
-    local out
+    local out=""
     local status
     local body
 
@@ -121,6 +121,7 @@ function main
     local -i total=0
     local -i failed=0
     local -a tests=()
+    local t
 
     start
 
