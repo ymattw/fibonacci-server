@@ -14,6 +14,13 @@ class FibonacciServerTest(unittest.TestCase):
     def setUp(self):
         self._app = FibonacciServer()._test_client()
 
+    def test_index(self):
+        rv = self._app.get('/')
+        self.assertTrue(rv.status.startswith('200 '))
+        self.assertEqual(rv.headers['content-type'],
+                         'text/plain; charset=utf-8')
+        self.assertTrue(rv.data.startswith(b'Welcome'))
+
     def test_fib_invalid_version(self):
         rv = self._app.get('/v2/fib/0')
         self.assertTrue(rv.status.startswith('501 '))

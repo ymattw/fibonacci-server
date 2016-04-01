@@ -30,6 +30,15 @@ class FibonacciServer(object):
         self._add_routes()
         self._fib = Fibonacci()
 
+    def index(self):
+        """Handles `GET /` request, this is required when deploy to heroku (it
+        hits this uri to verify
+        """
+        msg = ('Welcome to Fibonacci Server!\n\n'
+               'Currently only one API is supported:\n\n'
+               'GET /v1/fib/:number\n')
+        return msg, 200, {'Content-Type': 'text/plain; charset=utf-8'}
+
     def fib(self, version, number):
         """Handles the `GET /:version/fib/:number` request. Status goes to
         header, data goes to body in JSON.
@@ -72,6 +81,7 @@ class FibonacciServer(object):
         logger.setLevel(logging.INFO)  # Turns off console log
 
     def _add_routes(self):
+        self._app.add_url_rule('/', endpoint='index', view_func=self.index)
         self._app.add_url_rule(
             '/<version>/fib/<number>', endpoint='fib', view_func=self.fib)
 
