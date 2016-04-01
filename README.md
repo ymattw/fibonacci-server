@@ -2,6 +2,18 @@
 
 _Just a toy project for demo purpose._
 
+**Table of Contents**
+
+  - [About](#about)
+  - [Requirements](#requirements)
+  - [Run](#run)
+  - [Request](#request)
+  - [Response](#response)
+  - [Performance](#performance)
+  - [Notes](#notes)
+  - [Development Guide](#development-guide)
+  - [Future Work](#future-work)
+
 # About
 
 **Fibonacci Server** is a RESTful web service that provides the [Fibonacci
