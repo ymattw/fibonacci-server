@@ -221,6 +221,7 @@ production and maintain for 5 years, followings work needs to be considered as
 well:
 
 - Start/stop scripts
+- Auto deployment (shippable package, auto versioning based on git tag)
 - Auto start across reboot
 - Monitoring mechanism (pid check, url check, performance check)
 
