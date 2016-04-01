@@ -1,6 +1,6 @@
 .PHONY: test lint unit report-html functional clean
 
-COVERAGE_OMIT ?= '*/lib*/python*/*,*/pypy-*/*'
+COVERAGE_OMIT ?= '*/lib*/python*/*,*/pypy-*/*,*/site-packages/*'
 
 test: lint unit functional
 	
